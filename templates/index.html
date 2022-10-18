@@ -97,18 +97,18 @@
                         let num = rows[i]['num'];
 
                         let temp_html = `
-        <div class="card">
-            <div class="card-body">
-                <div>
-                    <h5 class="card-title" style="font-weight: bold">${target}</h5>
-                    <p class="card-text">${date}</p>
-                </div>
-                <div>
-                    <button onclick="delete_target(${num})" type="button" class="btn btn-outline-danger">Delete</button>
-                    <button onclick="update_target(${num})" type="button" class="btn btn-outline-primary">Update</button>
-                </div>
-            </div>
-        </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <div>
+                                <h5 class="card-title" style="font-weight: bold">${target}</h5>
+                                <p class="card-text">${date}</p>
+                            </div>
+                            <div>
+                                <button onclick="delete_target(${num})" type="button" class="btn btn-outline-danger">Delete</button>
+                                <button onclick="update_target(${num})" type="button" class="btn btn-outline-primary">Update</button>
+                            </div>
+                        </div>
+                    </div>
                                             `;
 
                         $('#target-list').append(temp_html);
