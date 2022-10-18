@@ -6,9 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
 
     <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
 
@@ -18,7 +21,7 @@
         * {
             font-family: 'Gowun Dodum', sans-serif;
         }
-        
+
         .mypic {
             width: 100%;
             height: 200px;
@@ -31,11 +34,11 @@
             align-items: center;
             justify-content: center;
         }
-        
+
         .mypic>h1 {
             font-size: 30px;
         }
-        
+
         .mybox {
             width: 95%;
             max-width: 700px;
@@ -43,18 +46,18 @@
             box-shadow: 0px 0px 10px 0px lightblue;
             margin: 20px auto;
         }
-        
+
         .mybucket {
             display: flex;
             flex-direction: row;
             align-items: center;
             justify-content: space-between;
         }
-        
+
         .mybucket>input {
             width: 70%;
         }
-        
+
         .mybox>li {
             display: flex;
             flex-direction: row;
@@ -63,7 +66,7 @@
             margin-bottom: 10px;
             min-height: 48px;
         }
-        
+
         .mybox>li>h2 {
             max-width: 75%;
             font-size: 20px;
@@ -71,13 +74,13 @@
             margin-right: auto;
             margin-bottom: 0px;
         }
-        
+
         .mybox>li>h2.done {
             text-decoration: line-through
         }
     </style>
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             show_bucket();
         });
 
@@ -87,7 +90,7 @@
                 type: "GET",
                 url: "/bucket",
                 data: {},
-                success: function(response) {
+                success: function (response) {
                     let rows = response['buckets'];
                     for (let i = 0; i < rows.length; i++) {
                         let bucket = rows[i]['bucket'];
@@ -116,7 +119,7 @@
             });
         }
 
-        function save_bucket() {
+        function save_target() {
             let bucket = $('#bucket').val()
             $.ajax({
                 type: "POST",
@@ -124,7 +127,7 @@
                 data: {
                     bucket_give: bucket
                 },
-                success: function(response) {
+                success: function (response) {
                     alert(response["msg"])
                     window.location.reload()
                 }
@@ -138,7 +141,7 @@
                 data: {
                     'num_give': num
                 },
-                success: function(response) {
+                success: function (response) {
                     alert(response["msg"])
                     window.location.reload()
                 }
@@ -152,7 +155,7 @@
                 data: {
                     num_give: num
                 },
-                success: function(response) {
+                success: function (response) {
                     alert(response["msg"]);
                     window.location.reload();
                 }
@@ -167,9 +170,13 @@
     </div>
     <div class="mybox">
         <div class="mybucket">
-            <input id="bucket" class="form-control" type="text" placeholder="Enter your bucket list item here">
-            <button onclick="save_bucket()" type="button" class="btn btn-outline-primary">Save</button>
-
+            <input id="resolutionInput" class="form-control" type="text" placeholder="Enter your new year's resolution here">
+        </div>
+        <div>
+            <input id="targetDateInput" class="form-control" type="text" placeholder="Enter target date here (DD/MM/YYYY)">
+        </div>
+        <div>
+            <button onclick="save_target()" type="button" class="btn btn-outline-primary">Save New Target</button>
         </div>
     </div>
     <div class="mybox" id="bucket-list">
