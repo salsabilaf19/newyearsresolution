@@ -84,56 +84,57 @@
 
     </style>
     <script>
-        // $(document).ready(function () {
-        // show_bucket();
-        // });
+        $(document).ready(function () {
+            show_target();
+        });
 
-        function show_bucket() {
-            $('#bucket-list').empty();
+        function show_target() {
             $.ajax({
                 type: "GET",
-                url: "/bucket",
+                url: "/target",
                 data: {},
                 success: function (response) {
-                    let rows = response['buckets'];
+                    $('#target-list').empty();
+                    let rows = response['targets'];
                     for (let i = 0; i < rows.length; i++) {
-                        let bucket = rows[i]['bucket'];
+                        let target = rows[i]['target'];
+                        let date = rows[i]['date'];
                         let num = rows[i]['num'];
-                        let done = rows[i]['done'];
-                        let temp_html = '';
-                        if (done === 0) {
-                            temp_html = `
-                        <li>
-                            <h2>✅ ${bucket}</h2>
-                            <button onclick="done_bucket(${num})" type="button" class="btn btn-outline-primary">Done!</button>
-                            <button onclick="delete_bucket(${num})" type="button" class="btn btn-outline-danger">Delete!</button>
-                        </li>
+                        
+                        let temp_html = `
+        <div class="card">
+            <div class="card-body">
+                <div>
+                    <h5 class="card-title" style="font-weight: bold">${target}</h5>
+                    <p class="card-text">${date}</p>
+                </div>
+                <div>
+                    <button onclick="delete_target(${num})" type="button" class="btn btn-outline-danger">Delete</button>
+                    <button onclick="update_target(${num})" type="button" class="btn btn-outline-primary">Update</button>
+                </div>
+            </div>
+        </div>
                                             `;
-                        } else {
-                            temp_html = `
-                        <li>
-                            <h2 class="done">✅ ${bucket}</h2>
-                            <button onclick="delete_bucket(${num})" type="button" class="btn btn-outline-danger">Delete!</button>
-                        </li>
-                            `;
-                        }
-                        $('#bucket-list').append(temp_html);
+
+                        $('#target-list').append(temp_html);
                     }
                 }
             });
         }
 
         function save_target() {
-            let bucket = $('#bucket').val()
+            let target = $('#resolutionInput').val()
+            let date = $('#targetDateInput').val()
             $.ajax({
                 type: "POST",
-                url: "/bucket",
+                url: "/SaveTarget",
                 data: {
-                    bucket_give: bucket
+                    target_give: bucket,
+                    date_give: date
                 },
                 success: function (response) {
                     alert(response["msg"])
-                    window.location.reload()
+                    show_target();
                 }
             });
         }
@@ -173,12 +174,11 @@
         <h1>New Year's Resolution</h1>
     </div>
     <div class="mybucket">
-        <input id="resolutionInput" class="form-control" type="text"
-            placeholder="Enter your new year's resolution here">
+        <input id="resolutionInput" class="form-control" type="text" placeholder="Enter your new year's resolution here">
         <input id="targetDateInput" class="form-control" type="text" placeholder="Enter target date here (DD/MM/YYYY)">
         <button onclick="save_target()" type="button" class="btn btn-outline-primary">Save New Target</button>
     </div>
-    <div class="mybox" id="bucket-list">
+    <div class="mybox" id="target-list">
         <div class="card">
             <div class="card-body">
                 <div>
@@ -186,20 +186,8 @@
                     <p class="card-text">12/01/2021</p>
                 </div>
                 <div>
-                    <button onclick="save_target()" type="button" class="btn btn-outline-danger">Delete</button>
-                    <button onclick="save_target()" type="button" class="btn btn-outline-primary">Update</button>
-                </div>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-body">
-                <div>
-                    <h5 class="card-title" style="font-weight: bold">Weight Loss 15 kg</h5>
-                    <p class="card-text">12/01/2021</p>
-                </div>
-                <div>
-                    <button onclick="save_target()" type="button" class="btn btn-outline-danger">Delete</button>
-                    <button onclick="save_target()" type="button" class="btn btn-outline-primary">Update</button>
+                    <button onclick="delete_target(num)" type="button" class="btn btn-outline-danger">Delete</button>
+                    <button onclick="update_target(num)" type="button" class="btn btn-outline-primary">Update</button>
                 </div>
             </div>
         </div>

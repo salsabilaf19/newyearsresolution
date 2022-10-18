@@ -10,19 +10,20 @@ app = Flask(__name__)
 def home():
    return render_template('index.html')
 
-@app.route("/bucket", methods=["POST"])
-def bucket_post():
-    bucket_receive = request.form["bucket_give"]
-    # to count list bucket
+@app.route("/SaveTarget", methods=["POST"])
+def save_target():
+    target_receive = request.form["target_give"]
+    date_receive = request.form["date_give"]
+
     count = db.newyearsresolution.count_documents({})
     num = count + 1
     doc = {
         'num':num,
-        'bucket': bucket_receive,
-        'done':0
+        'target': target_receive,
+        'date': date_receive
     }
     db.newyearsresolution.insert_one(doc)
-    return jsonify({'msg':'data saved!'})
+    return jsonify({'msg':'Data saved!'})
 
 @app.route("/delete", methods=["POST"])
 def delete_bucket():
@@ -39,10 +40,10 @@ def bucket_done():
     )
     return jsonify({'msg': 'Update done!'})
 
-@app.route("/bucket", methods=["GET"])
-def bucket_get():
-    buckets_list = list(db.newyearsresolution.find({},{'_id':False}))
-    return jsonify({'buckets':buckets_list})
+@app.route("/target", methods=["GET"])
+def target_get():
+    target_list = list(db.newyearsresolution.find({},{'_id':False}))
+    return jsonify({'targets':target_list})
 
 if __name__ == '__main__':
    app.run('0.0.0.0', port=5000, debug=True)
