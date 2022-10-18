@@ -65,26 +65,21 @@
             text-align: center;
         }
 
-        .mybox>li {
+        .mybox > .card {
+            margin-bottom: 20px;
+        }
+
+        .mybox > .card > .card-body {
             display: flex;
             flex-direction: row;
             align-items: center;
-            justify-content: center;
-            margin-bottom: 10px;
-            min-height: 48px;
+            justify-content: space-between;
         }
 
-        .mybox>li>h2 {
-            max-width: 75%;
-            font-size: 20px;
-            font-weight: 500;
-            margin-right: auto;
-            margin-bottom: 0px;
+        .mybox > .card > .card-body > div > button {
+            margin-left: 10px;
         }
 
-        .mybox>li>h2.done {
-            text-decoration: line-through
-        }
     </style>
     <script>
         // $(document).ready(function () {
@@ -184,18 +179,26 @@
     <div class="mybox" id="bucket-list">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Weight Loss 15 kg</h5>
-                <p class="card-text">12/01/2021</p>
-                <button onclick="save_target()" type="button" class="btn btn-outline-primary">Delete</button>
-                <button onclick="save_target()" type="button" class="btn btn-outline-primary">Update</button>
+                <div>
+                    <h5 class="card-title">Weight Loss 15 kg</h5>
+                    <p class="card-text">12/01/2021</p>
+                </div>
+                <div>
+                    <button onclick="save_target()" type="button" class="btn btn-outline-primary">Delete</button>
+                    <button onclick="save_target()" type="button" class="btn btn-outline-primary">Update</button>
+                </div>
             </div>
         </div>
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Weight Loss 15 kg</h5>
-                <p class="card-text">12/01/2021</p>
-                <button onclick="save_target()" type="button" class="btn btn-outline-primary">Delete</button>
-                <button onclick="save_target()" type="button" class="btn btn-outline-primary">Update</button>
+                <div>
+                    <h5 class="card-title">Weight Loss 15 kg</h5>
+                    <p class="card-text">12/01/2021</p>
+                </div>
+                <div>
+                    <button onclick="save_target()" type="button" class="btn btn-outline-primary">Delete</button>
+                    <button onclick="save_target()" type="button" class="btn btn-outline-primary">Update</button>
+                </div>
             </div>
         </div>
     </div>
