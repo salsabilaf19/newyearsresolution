@@ -41,13 +41,19 @@
 
         .mybox {
             width: 95%;
+            max-width: 700px;
+            padding: 20px;
+            box-shadow: 0px 0px 10px 0px lightblue;
+            margin: 30px auto;
+        }
+
+        .mybucket {
+            width: 95%;
             max-width: 500px;
             padding: 20px;
             box-shadow: 0px 0px 10px 0px lightblue;
             margin: 20px auto;
-        }
 
-        .mybucket {
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -81,9 +87,9 @@
         }
     </style>
     <script>
-        $(document).ready(function () {
-            show_bucket();
-        });
+        // $(document).ready(function () {
+        // show_bucket();
+        // });
 
         function show_bucket() {
             $('#bucket-list').empty();
@@ -169,26 +175,29 @@
     <div class="mypic">
         <h1>My Bucketlist</h1>
     </div>
-    <div class="mybox">
-        <div class="mybucket">
-            <input id="resolutionInput" class="form-control" type="text" placeholder="Enter your new year's resolution here">
-            <input id="targetDateInput" class="form-control" type="text" placeholder="Enter target date here (DD/MM/YYYY)">
-            <button onclick="save_target()" type="button" class="btn btn-outline-primary">Save New Target</button>
-        </div>
+    <div class="mybucket">
+        <input id="resolutionInput" class="form-control" type="text"
+            placeholder="Enter your new year's resolution here">
+        <input id="targetDateInput" class="form-control" type="text" placeholder="Enter target date here (DD/MM/YYYY)">
+        <button onclick="save_target()" type="button" class="btn btn-outline-primary">Save New Target</button>
     </div>
     <div class="mybox" id="bucket-list">
-        <li>
-            <h2>✅ Bucket list number 1</h2>
-            <button onclick="done_bucket(5)" type="button" class="btn btn-outline-primary">Done!</button>
-        </li>
-        <li>
-            <h2>✅ Bucket list number 2</h2>
-            <button onclick="done_bucket(5)" type="button" class="btn btn-outline-primary">Done!</button>
-        </li>
-        <li>
-            <h2>✅ Bucket list number 3</h2>
-            <button onclick="done_bucket(5)" type="button" class="btn btn-outline-primary">Done!</button>
-        </li>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Weight Loss 15 kg</h5>
+                <p class="card-text">12/01/2021</p>
+                <button onclick="save_target()" type="button" class="btn btn-outline-primary">Delete</button>
+                <button onclick="save_target()" type="button" class="btn btn-outline-primary">Update</button>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Weight Loss 15 kg</h5>
+                <p class="card-text">12/01/2021</p>
+                <button onclick="save_target()" type="button" class="btn btn-outline-primary">Delete</button>
+                <button onclick="save_target()" type="button" class="btn btn-outline-primary">Update</button>
+            </div>
+        </div>
     </div>
 </body>
 
