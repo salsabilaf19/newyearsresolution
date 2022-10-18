@@ -26,7 +26,7 @@ def save_target():
     return jsonify({'msg':'Data saved!'})
 
 @app.route("/delete", methods=["POST"])
-def delete_bucket():
+def delete_target():
     num_receive = request.form['num_give']
     db.newyearsresolution.delete_one({'num': int(num_receive)})
     return jsonify({'msg': 'delete done!'})
