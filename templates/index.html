@@ -13,7 +13,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
 
-    <title>Bucket List</title>
+    <title>New Year's Resolution</title>
 
     <style>
         * {
@@ -105,11 +105,11 @@
                             </div>
                             <div>
                                 <button onclick="delete_target(${num})" type="button" class="btn btn-outline-danger">Delete</button>
-                                <button onclick="update_target(${num})" type="button" class="btn btn-outline-primary">Update</button>
+                                <a href="{{ url_for('modal') }}"><button onclick="update_target(${num})" type="button" id="myModalLabel1" class="btn btn-outline-primary">Update</button></a>
                             </div>
                         </div>
-                    </div>
-                                            `;
+                    </div>                        
+                    `;
 
                         $('#target-list').append(temp_html);
                     }
@@ -166,6 +166,7 @@
 </head>
 
 <body>
+
     <div class="mypic">
         <h1>New Year's Resolution</h1>
     </div>
@@ -175,19 +176,9 @@
         <button onclick="save_target()" type="button" class="btn btn-outline-primary">Save New Target</button>
     </div>
     <div class="mybox" id="target-list">
-        <div class="card">
-            <div class="card-body">
-                <div>
-                    <h5 class="card-title" style="font-weight: bold">Weight Loss 15 kg</h5>
-                    <p class="card-text">12/01/2021</p>
-                </div>
-                <div>
-                    <button onclick="delete_target(num)" type="button" class="btn btn-outline-danger">Delete</button>
-                    <button onclick="update_target(num)" type="button" class="btn btn-outline-primary">Update</button>
-                </div>
-            </div>
-        </div>
     </div>
+    {% block modal %}{% endblock %}
 </body>
+{% block script %} {% endblock %}
 
 </html>

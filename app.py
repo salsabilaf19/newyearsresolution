@@ -45,5 +45,10 @@ def target_get():
     target_list = list(db.newyearsresolution.find({},{'_id':False}))
     return jsonify({'targets':target_list})
 
+@app.route("/modal")
+def modal():
+    return render_template("modal.html", methods=["POST"])
+
+
 if __name__ == '__main__':
    app.run('0.0.0.0', port=5000, debug=True)
