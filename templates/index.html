@@ -76,7 +76,7 @@
         }
         
         .mybox>.card>.card-body>div>button {
-            margin-right: 5px;
+            margin-right: 10px;
         }
 
         .wraper {
@@ -86,12 +86,25 @@
             justify-content: center;
         }
 
-        input[type="checkbox"] {
-            appearance: none;
-            -webkit-appearance: none;
+        .undone-btn {
             height: 25px;
             width: 25px;
             background-color: #d5d5d5;
+            border-width: 0px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 15px;
+        }
+
+        .undone-btn:hover {
+            background-color: #a5a5a5;
+        }
+
+        .done-btn {
+            height: 25px;
+            width: 25px;
+            background-color: #4567ff;
+            border-width: 0px;
             border-radius: 5px;
             cursor: pointer;
             margin-right: 15px;
@@ -99,30 +112,16 @@
             display: flex;
             align-items: center;
             justify-content: center;
-
-            outline: none;
         }
 
-        input[type="checkbox"]:after {
+        .done-btn>i {
             content: "\f00c";
             font-family: "Font Awesome 6 free";
             font-weight: 900;
-            font-size: 18px;
+            font-size: 17px;
             color: white;
-            display: none;
         }
 
-        input[type="checkbox"]:hover {
-            background-color: #a5a5a5;
-        }
-
-        input[type="checkbox"]:checked {
-            background-color: #4567ff;
-        }
-
-        input[type="checkbox"]:checked:after {
-            display: block;
-        }
     </style>
     <script>
         $(document).ready(function() {
@@ -141,18 +140,19 @@
                         let target = rows[i]['target'];
                         let date = rows[i]['date'];
                         let num = rows[i]['num'];
+                        let done = rows[i]['done'];
 
-                        let temp_html = `
+                        let temp_html = ''
+                        if (done === 0) {
+                            temp_html = `
                     <div class="card">
                         <div class="card-body">
                             <div class="wraper">
-                                <input type="checkbox" id="check">
-                                <label for="check">
-                                    <div>
-                                        <h5 class="card-title" style="font-weight: bold">${target}</h5>
-                                        <p class="card-text">${date}</p>
-                                    </div>
-                                </label>
+                                <button onclick="target_done(${num})" type="button" class="undone-btn"></button>
+                                <div>
+                                    <h5 class="card-title" style="font-weight: bold">${target}</h5>
+                                    <p class="card-text">${date}</p>
+                                </div>
                             </div>
                             <div>
                                 <button onclick="delete_target(${num})" type="button" class="btn btn-outline-danger">Delete</button>
@@ -161,6 +161,25 @@
                         </div>
                     </div>                        
                     `;
+                        } else {
+                            temp_html = `
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="wraper">
+                                <button onclick="cancel_done(${num})" type="button" class="done-btn"><i class="fa-solid fa-check"></i></button>
+                                <div>
+                                    <h5 class="card-title" style="font-weight: bold; text-decoration: line-through">${target}</h5>
+                                    <p class="card-text" style="text-decoration: line-through">${date}</p>
+                                </div>
+                            </div>
+                            <div>
+                                <button onclick="delete_target(${num})" type="button" class="btn btn-outline-danger">Delete</button>
+                                <a href="{{ url_for('modal') }}"><button onclick="update_target(${num})" type="button" class="btn btn-outline-primary">Update</button></a>
+                            </div>
+                        </div>
+                    </div>                        
+                    `;
+                        }
 
                         $('#target-list').append(temp_html);
                     }
@@ -180,22 +199,34 @@
                 },
                 success: function(response) {
                     alert(response["msg"])
-                        // show_target();
-                    window.location.reload()
+                    show_target();
+                    //window.location.reload()
                 }
             });
         }
 
-        function done_bucket(num) {
+        function target_done(num) {
             $.ajax({
                 type: "POST",
-                url: "/bucket/done",
+                url: "/TargetDone",
                 data: {
                     'num_give': num
                 },
                 success: function(response) {
-                    alert(response["msg"])
-                    window.location.reload()
+                    show_target()
+                }
+            });
+        }
+
+        function cancel_done(num) {
+            $.ajax({
+                type: "POST",
+                url: "/CancelDone",
+                data: {
+                    'num_give': num
+                },
+                success: function(response) {
+                    show_target()
                 }
             });
         }
