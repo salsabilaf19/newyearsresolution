@@ -42,7 +42,7 @@
             width: 95%;
             max-width: 700px;
             padding: 20px;
-            box-shadow: 0px 0px 10px 0px lightblue;
+            box-shadow: 0px 0px 10px 0px lightcoral;
             margin: 30px auto;
         }
         
@@ -50,13 +50,43 @@
             width: 95%;
             max-width: 500px;
             padding: 20px;
-            box-shadow: 0px 0px 10px 0px lightblue;
+            box-shadow: 0px 0px 10px 0px lightcoral;
             margin: 20px auto;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
         }
+        /* .mybucket::before,
+        .mybucket::after {
+            content: "";
+            top: -2px;
+            left: -2px;
+            position: absolute;
+            background: linear-gradient(45deg, #ff0037, #ff00f2, #f84983, #fba300, #ff6600, #ff3c00, #3348ff, #ae00ff);
+           
+            background-size: 400%;
+            width: calc(100% + 4px);
+            height: calc(100% + 4px);
+            z-index: -1;
+            animation: glow 20s linear infinite;
+        }
+        
+        .mybucket::after {
+            filter: blur(50px);
+        }
+        
+        @keyframes glow {
+            0% {
+                background-position: 0 0;
+            }
+            50% {
+                background-position: 400% 0;
+            }
+            100% {
+                background-position: 0 0;
+            }
+        } */
         
         .mybucket>input {
             margin-bottom: 15px;
@@ -97,20 +127,19 @@
                         let num = rows[i]['num'];
 
                         let temp_html = `
-                    <div class="card">
-                        <div class="card-body">
-                            <div>
-                                <h5 class="card-title" style="font-weight: bold">${target}</h5>
-                                <p class="card-text">${date}</p>
+                        <div class="card">
+                            <div class="card-body">
+                                <div>
+                                    <h5 class="card-title" style="font-weight: bold">${target}</h5>
+                                    <p class="card-text">${date}</p>
+                                </div>
+                                <div>
+                                    <a href="{{ url_for('modal') }}"><button type="button" class="btn btn-outline-primary">Update</button></a>
+                                    <button onclick="delete_target(${num})" type="button" class="btn btn-outline-danger">Delete</button>
+                                </div>
                             </div>
-                            <div>
-                                <button onclick="delete_target(${num})" type="button" class="btn btn-outline-danger">Delete</button>
-                                <a href="{{ url_for('modal') }}"><button onclick="update_target(${num})" type="button" class="btn btn-outline-primary">Update</button></a>
-                            </div>
-                        </div>
-                    </div>                        
-                    `;
-
+                        </div>                        
+                        `;
                         $('#target-list').append(temp_html);
                     }
                 }
