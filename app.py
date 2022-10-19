@@ -21,7 +21,8 @@ def save_target():
     doc = {
         'num':num,
         'target': target_receive,
-        'date': date_receive
+        'date': date_receive,
+        'done': 0
     }
     db.newyearsresolution.insert_one(doc)
     return jsonify({'msg':'Data saved!'})
@@ -32,14 +33,23 @@ def delete_target():
     db.newyearsresolution.delete_one({'num': int(num_receive)})
     return jsonify({'msg': 'deleted or completed target !'})
     
-@app.route("/bucket/done", methods=["POST"])
+@app.route("/TargetDone", methods=["POST"])
 def bucket_done():
     num_receive = request.form["num_give"]
     db.newyearsresolution.update_one(
         {'num': int(num_receive)},
         {'$set': {'done': 1}}
     )
-    return jsonify({'msg': 'Update done!'})
+    return jsonify({'msg': 'Target done!'})
+
+@app.route("/CancelDone", methods=["POST"])
+def cancel_done():
+    num_receive = request.form["num_give"]
+    db.newyearsresolution.update_one(
+        {'num': int(num_receive)},
+        {'$set': {'done': 0}}
+    )
+    return jsonify({'msg': 'Target done!'})
 
 @app.route("/target", methods=["GET"])
 def target_get():
