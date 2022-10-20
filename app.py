@@ -144,7 +144,7 @@ def login():
 def logged_in():
     if "email" in session:
         email = session["email"]
-        return render_template('logged_in.html', email=email)
+        return render_template('index.html', email=email)
     else:
         return redirect(url_for("login"))
 
