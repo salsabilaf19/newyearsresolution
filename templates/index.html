@@ -42,7 +42,7 @@
 
         .mybox {
             width: 95%;
-            max-width: 500px;
+            max-width: 700px;
             padding: 20px;
             box-shadow: 0px 0px 10px 0px lightblue;
             margin: 30px auto;
@@ -160,7 +160,6 @@
             pointer-events: auto;
         }
         body {
-            background-image : url('https://wallpaperaccess.com/full/2891924.jpg');
             width : 100%;
             height : 500px;
             background-size : cover;
@@ -351,6 +350,7 @@
 <body>
     <div class="mypic">
         <h1>New Year's Resolution</h1>
+        <a href="{{url_for('logout')}}" class="btn btn-light" role="button">Sign Out</a>
     </div>
     <div class="mybucket">
         <input id="resolutionInput" class="form-control" type="text"
@@ -368,7 +368,5 @@
             </div>
         </div>
     </div>
-
-    <a href="{{url_for('logout')}}" class="btn btn-info" role="button">Sign Out</a>
 </body>
 </html>
