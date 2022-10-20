@@ -10,9 +10,9 @@ app = Flask(__name__)
 app.secret_key = "testing"
 
 # jadi ini rute untuk ke new year nya
-@app.route('/')
-def home():
-   return render_template('index.html')
+# @app.route('/halamanlogin')
+# def home():
+#    return render_template('login.html')
 
 @app.route("/SaveTarget", methods=["POST"])
 def save_target():
@@ -78,7 +78,7 @@ def target_get():
 
 
 # nah ini tuh bentrok sama yang route new years resolution, makanya ku kasih /1
-@app.route("/1", methods=['post', 'get'])
+@app.route("/", methods=['post', 'get'])
 def index():
     message = ''
     #if method post in index
