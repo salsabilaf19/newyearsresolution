@@ -92,7 +92,7 @@ def index():
         user_found = records.find_one({"name": user})
         email_found = records.find_one({"email": email})
         if user_found:
-            message = 'There already is a user by that name'
+            message = 'There is already a user using that name'
             return render_template('index1.html', message=message)
         if email_found:
             message = 'This email already exists in database'
