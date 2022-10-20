@@ -296,15 +296,15 @@
 
                         if (number === num) {
                             let temp_html = `
-                <label for="target">New Year's Resolution:</label>
-                <input class="form-control" type="text"  id="target" value="${target}">
-                <label for="date">Target Date:</label>
-                <input class="form-control" type="text"  id="date" value="${date}">
-                <hr>
-                <div>
-                    <button onclick="update_target(${num})" type="button" class="btn btn-outline-primary">Update</button>
-                    <button onclick="close_popup()" type="button" id="close-btn" class="btn btn-outline-danger">Close</button>
-                </div>
+                        <label for="target">New Year's Resolution:</label>
+                            <input class="form-control" type="text"  id="target" value="${target}">
+                        <label for="date">Target Date:</label>
+                            <input class="form-control" type="text"  id="date" value="${date}">
+                        <hr>
+                        <div>
+                            <button onclick="update_target(${num})" type="button" class="btn btn-outline-primary">Update</button>
+                            <button onclick="close_popup()" type="button" id="close-btn" class="btn btn-outline-danger">Close</button>
+                        </div>
                 `
                             $('#edit_input').append(temp_html);
                         }
