@@ -51,41 +51,24 @@ def cancel_done():
     )
     return jsonify({'msg': 'Target done!'})
 
+@app.route("/update", methods=["POST"])
+def update_target():
+    num_receive = request.form['num_give']
+    target_receive = request.form['target_give']
+    date_receive = request.form['date_give']
+    db.newyearsresolution.update_one(
+        {'num': int(num_receive)},
+        {'$set': {
+            'target': target_receive,
+            'date': date_receive
+            }}
+    )
+    return jsonify({'msg': 'Update success!'})
+
 @app.route("/target", methods=["GET"])
 def target_get():
     target_list = list(db.newyearsresolution.find({},{'_id':False}))
     return jsonify({'targets':target_list})
-
-@app.route('/modal', methods=["GET"])
-def modal():
-   return render_template('modal.html')
-
-@app.route("/targetupdate", methods=["GET"])
-def target_show():
-    target_new = list(db.newyearsresolution.find({},{'_id':False}))
-    return jsonify({'targets_update':target_new})
-
-
-@app.route("/saveupdate", methods=["POST"])
-def save_update():
-    target_update = request.form["target_give"]
-    date_update = request.form["date_give"]
-
-    count = db.newyearsresolution.count_documents({})
-    num = count + 1
-    doc = {
-        'num':num,
-        'target': target_update,
-        'date': date_update
-    }
-    db.newyearsresolution.insert_one(doc)
-    return jsonify({'msg':'Data saved!'})
-
-
-
-    # db.newyearsresolution.insert_one(doc)
-
-
 
 if __name__ == '__main__':
    app.run('0.0.0.0', port=5000, debug=True)
