@@ -6,18 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
     <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
-        integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer"
+    />
 
     <title>New Year's Resolution</title>
 
@@ -25,7 +21,7 @@
         * {
             font-family: 'Gowun Dodum', sans-serif;
         }
-
+        
         .mypic {
             width: 100%;
             height: 200px;
@@ -38,12 +34,12 @@
             align-items: center;
             justify-content: center;
         }
-
+        
         .mypic>h1 {
             font-size: 60px;
             font-family: 'Ma Shan Zheng', cursive;
         }
-
+        
         .mybox {
             width: 95%;
             max-width: 700px;
@@ -51,7 +47,7 @@
             box-shadow: 0px 0px 10px 0px lightblue;
             margin: 30px auto;
         }
-
+        
         .mybucket {
             width: 95%;
             max-width: 500px;
@@ -63,34 +59,34 @@
             align-items: center;
             justify-content: center;
         }
-
+        
         .mybucket>input {
             margin-bottom: 15px;
             text-align: center;
         }
-
+        
         .mybox>.card {
             margin-bottom: 20px;
         }
-
+        
         .mybox>.card>.card-body {
             display: flex;
             flex-direction: row;
             align-items: center;
             justify-content: space-between;
         }
-
+        
         .mybox>.card>.card-body>div>button {
             margin-left: 10px;
         }
-
+        
         .wraper {
             display: flex;
             flex-direction: row;
             align-items: flex-start;
             justify-content: center;
         }
-
+        
         .undone-btn {
             height: 25px;
             width: 25px;
@@ -100,11 +96,11 @@
             cursor: pointer;
             margin-right: 15px;
         }
-
+        
         .undone-btn:hover {
             background-color: #a5a5a5;
         }
-
+        
         .done-btn {
             height: 25px;
             width: 25px;
@@ -113,12 +109,11 @@
             border-radius: 5px;
             cursor: pointer;
             margin-right: 15px;
-
             display: flex;
             align-items: center;
             justify-content: center;
         }
-
+        
         .done-btn>i {
             content: "\f00c";
             font-family: "Font Awesome 6 free";
@@ -126,7 +121,7 @@
             font-size: 17px;
             color: white;
         }
-
+        
         .modal-container {
             position: fixed;
             top: 0;
@@ -134,39 +129,36 @@
             height: 100%;
             width: 100%;
             background-color: rgba(0, 0, 0, 0.3);
-
             display: flex;
             align-items: center;
             justify-content: center;
-
             opacity: 0;
             pointer-events: none;
         }
-
+        
         .modal-card {
             background-color: white;
             width: 500px;
-            height: 280px;
+            height: 310px;
             border-radius: 10px;
             padding: 25px 50px;
         }
-
+        
         .modal-card>div>div>button {
             margin-right: 10px;
         }
-
+        
         .modal-card>h3 {
             font-weight: bold;
         }
-
+        
         .modal-container.show {
             opacity: 1;
             pointer-events: auto;
         }
-
     </style>
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             show_target();
         });
 
@@ -175,7 +167,7 @@
                 type: "GET",
                 url: "/target",
                 data: {},
-                success: function (response) {
+                success: function(response) {
                     $('#target-list').empty();
                     let rows = response['targets'];
                     for (let i = 0; i < rows.length; i++) {
@@ -239,7 +231,7 @@
                     target_give: target,
                     date_give: date
                 },
-                success: function (response) {
+                success: function(response) {
                     alert(response["msg"])
                     show_target();
                 }
@@ -253,7 +245,7 @@
                 data: {
                     'num_give': num
                 },
-                success: function (response) {
+                success: function(response) {
                     show_target()
                 }
             });
@@ -266,7 +258,7 @@
                 data: {
                     'num_give': num
                 },
-                success: function (response) {
+                success: function(response) {
                     show_target()
                 }
             });
@@ -279,13 +271,13 @@
                 data: {
                     num_give: num
                 },
-                success: function (response) {
+                success: function(response) {
                     alert(response["msg"]);
                     window.location.reload();
                 }
             });
         }
-        
+
         function edit_target(num) {
             let modal_container = document.getElementById("modal-container");
             modal_container.classList.add('show');
@@ -294,7 +286,7 @@
                 type: "GET",
                 url: "/target",
                 data: {},
-                success: function (response) {
+                success: function(response) {
                     $('#edit_input').empty();
                     let rows = response['targets'];
                     for (let i = 0; i < rows.length; i++) {
@@ -305,9 +297,9 @@
                         if (number === num) {
                             let temp_html = `
                 <label for="target">New Year's Resolution:</label>
-                <input type="text" id="target" value="${target}"><br><br>
+                <input class="form-control" type="text" id="target" value="${target}">
                 <label for="date">Target Date:</label>
-                <input type="text" id="date" value="${date}">
+                <input class="form-control" type="text" id="date" value="${date}">
                 <hr>
                 <div>
                     <button onclick="update_target(${num})" type="button" class="btn btn-outline-primary">Update</button>
@@ -338,12 +330,11 @@
                     target_give: target,
                     date_give: date
                 },
-                success: function (response) {
+                success: function(response) {
                     alert(response["msg"]);
                 }
             });
         }
-
     </script>
 </head>
 
@@ -352,8 +343,7 @@
         <h1>New Year's Resolution</h1>
     </div>
     <div class="mybucket">
-        <input id="resolutionInput" class="form-control" type="text"
-            placeholder="Enter your new year's resolution here">
+        <input id="resolutionInput" class="form-control" type="text" placeholder="Enter your new year's resolution here">
         <input id="targetDateInput" class="form-control" type="text" placeholder="Enter target date here (DD/MM/YYYY)">
         <button onclick="save_target()" type="button" class="btn btn-outline-primary">Save New Target</button>
     </div>
@@ -365,7 +355,7 @@
             <h3>Edit Your New Year's Resolution</h3>
             <hr>
             <div id="edit_input">
-                
+
             </div>
         </div>
     </div>
