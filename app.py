@@ -78,7 +78,7 @@ def target_get():
 
 
 # nah ini tuh bentrok sama yang route new years resolution, makanya ku kasih /1
-@app.route("/", methods=['post', 'get'])
+@app.route("/regist", methods=['post', 'get'])
 def index():
     message = ''
     #if method post in index
@@ -118,7 +118,7 @@ def index():
             return render_template('logged_in.html', email=new_email)
     return render_template('index1.html')
 
-@app.route("/login", methods=["POST", "GET"])
+@app.route("/", methods=["POST", "GET"])
 def login():
     message = 'Please login to your account'
     if "email" in session:
@@ -159,9 +159,9 @@ def logged_in():
 def logout():
     if "email" in session:
         session.pop("email", None)
-        return render_template("signout.html")
+        return render_template("login.html")
     else:
-        return render_template('index1.html')
+        return render_template('login.html')
 
 
 if __name__ == '__main__':
