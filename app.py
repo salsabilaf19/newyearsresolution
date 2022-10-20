@@ -92,7 +92,7 @@ def index():
         user_found = records.find_one({"name": user})
         email_found = records.find_one({"email": email})
         if user_found:
-            message = 'There is already a user using that name'
+            message = 'There already is a user by that name'
             return render_template('index1.html', message=message)
         if email_found:
             message = 'This email already exists in database'
@@ -114,7 +114,7 @@ def index():
             #if registered redirect to logged in as the registered user
             
             # NAH DISINI ITU HARUSNYA SETTING KE NEWYEARSRESOLUTION(INDEX.HTML)
-            return render_template('logged_in.html', email=new_email)
+            return render_template('login.html', email=new_email)
     return render_template('index1.html')
 
 @app.route("/", methods=["POST", "GET"])
@@ -158,9 +158,9 @@ def logged_in():
 def logout():
     if "email" in session:
         session.pop("email", None)
-        return render_template("login.html")
+        return redirect(url_for("login"))
     else:
-        return render_template('login.html')
+        return redirect(url_for("login"))
 
 
 if __name__ == '__main__':
