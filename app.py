@@ -9,7 +9,7 @@ records = db.users
 app = Flask(__name__)
 app.secret_key = "testing"
 
-
+# jadi ini rute untuk ke new year nya
 @app.route('/')
 def home():
    return render_template('index.html')
@@ -30,11 +30,14 @@ def save_target():
     db.newyearsresolution.insert_one(doc)
     return jsonify({'msg':'Data saved!'})
 
+
 @app.route("/delete", methods=["POST"])
 def delete_target():
     num_receive = request.form['num_give']
     db.newyearsresolution.delete_one({'num': int(num_receive)})
     return jsonify({'msg': 'deleted or completed target !'})
+
+
     
 @app.route("/TargetDone", methods=["POST"])
 def bucket_done():
@@ -73,6 +76,8 @@ def target_get():
     target_list = list(db.newyearsresolution.find({},{'_id':False}))
     return jsonify({'targets':target_list})
 
+
+# nah ini tuh bentrok sama yang route new years resolution, makanya ku kasih /1
 @app.route("/1", methods=['post', 'get'])
 def index():
     message = ''
@@ -108,6 +113,8 @@ def index():
             user_data = records.find_one({"email": email})
             new_email = user_data['email']
             #if registered redirect to logged in as the registered user
+            
+            # NAH DISINI ITU HARUSNYA SETTING KE NEWYEARSRESOLUTION(INDEX.HTML)
             return render_template('logged_in.html', email=new_email)
     return render_template('index1.html')
 
