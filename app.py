@@ -37,7 +37,6 @@ def delete_target():
     db.newyearsresolution.delete_one({'num': int(num_receive)})
     return jsonify({'msg': 'deleted or completed target !'})
 
-
     
 @app.route("/TargetDone", methods=["POST"])
 def bucket_done():
