@@ -60,7 +60,6 @@ def target_get():
 def modal():
    return render_template('modal.html')
 
-
 @app.route("/targetupdate", methods=["GET"])
 def target_show():
     target_new = list(db.newyearsresolution.find({},{'_id':False}))
