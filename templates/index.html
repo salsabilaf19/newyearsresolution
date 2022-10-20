@@ -138,6 +138,9 @@
             display: flex;
             align-items: center;
             justify-content: center;
+
+            opacity: 0;
+            pointer-events: none;
         }
 
         .modal-card {
@@ -150,6 +153,15 @@
 
         .modal-card>div>button {
             margin-right: 10px;
+        }
+
+        .modal-card>h3 {
+            font-weight: bold;
+        }
+
+        .modal-container.show {
+            opacity: 1;
+            pointer-events: auto;
         }
 
     </style>
@@ -185,7 +197,7 @@
                                 </div>
                             </div>
                             <div>
-                                <button onclick="update_target(${num})" type="button" class="btn btn-outline-primary">Edit</button></a>
+                                <button onclick="edit_target(${num})" type="button" class="btn btn-outline-primary">Edit</button></a>
                                 <button onclick="delete_target(${num})" type="button" class="btn btn-outline-danger">Delete</button>
                             </div>
                         </div>
@@ -203,7 +215,7 @@
                                 </div>
                             </div>
                             <div>
-                                <button onclick="update_target(${num})" type="button" class="btn btn-outline-primary">Edit</button></a>
+                                <button onclick="edit_target(${num})" type="button" class="btn btn-outline-primary">Edit</button></a>
                                 <button onclick="delete_target(${num})" type="button" class="btn btn-outline-danger">Delete</button>
                             </div>
                         </div>
@@ -273,6 +285,65 @@
                 }
             });
         }
+        
+        function edit_target(num) {
+            let modal_container = document.getElementById("modal-container");
+            modal_container.classList.add('show');
+
+            $.ajax({
+                type: "GET",
+                url: "/target",
+                data: {},
+                success: function (response) {
+                    $('#edit_input').empty();
+                    let rows = response['targets'];
+                    for (let i = 0; i < rows.length; i++) {
+                        let target = rows[i]['target'];
+                        let date = rows[i]['date'];
+                        let number = rows[i]['num'];
+
+                        if (number === num) {
+                            let temp_html = `
+                <label for="target">New Year's Resolution:</label>
+                <input type="text" id="target" value="${target}"><br><br>
+                <label for="date">Target Date:</label>
+                <input type="text" id="date" value="${date}">
+                <hr>
+                <div>
+                    <button onclick="update_target(${num})" type="button" class="btn btn-outline-primary">Update</button>
+                    <button onclick="close_popup()" type="button" id="close-btn" class="btn btn-outline-danger">Close</button>
+                </div>
+                `
+                            $('#edit_input').append(temp_html);
+                        }
+                    }
+                }
+            });
+        }
+
+        function close_popup() {
+            let modal_container = document.getElementById("modal-container");
+            modal_container.classList.remove('show');
+            show_target();
+        }
+
+        function update_target(num) {
+            let target = $('#target').val()
+            let date = $('#date').val()
+            $.ajax({
+                type: "POST",
+                url: "/update",
+                data: {
+                    num_give: num,
+                    target_give: target,
+                    date_give: date
+                },
+                success: function (response) {
+                    alert(response["msg"]);
+                }
+            });
+        }
+
     </script>
 </head>
 
@@ -289,18 +360,12 @@
     <div class="mybox" id="target-list">
     </div>
 
-    <div class="modal-container">
+    <div class="modal-container" id="modal-container">
         <div class="modal-card">
             <h3>Edit Your New Year's Resolution</h3>
             <hr>
-            <label for="target">New Year's Resolution:</label>
-            <input type="text" id="target" value="target"><br><br>
-            <label for="date">Target Date:</label>
-            <input type="text" id="date" value="date">
-            <hr>
-            <div>
-                <button type="button" class="btn btn-outline-primary">Update</button>
-                <button type="button" id="close-btn" class="btn btn-outline-danger">Close</button>
+            <div id="edit_input">
+                
             </div>
         </div>
     </div>
